@@ -57,7 +57,7 @@ with open("test_data.jsonl", "r",
 
 test_data_dict.clear()
 
-with open("telegram/lead_gpt_prompts.jsonl", "r",
+with open("lead_gpt_prompts.jsonl", "r",
           encoding="utf-8") as f:
     for line in f:
         item = json.loads(line)
