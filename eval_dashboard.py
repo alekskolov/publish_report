@@ -43,7 +43,7 @@ for sample_id in samples_ids:
 #         final_data["Диалог с ботом"].append(sample['input'])
 
 test_data_dict={}
-with open("evals/registry/data/1test_dialog_bot/dialog.jsonl", "r",
+with open("test_data.jsonl", "r",
           encoding="utf-8") as f:
     for line in f:
         item = json.loads(line)
