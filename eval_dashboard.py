@@ -9,7 +9,7 @@ with open("report.jsonl", "r", encoding="utf-8") as f:
     lines = f.readlines()
     data = [json.loads(line) for line in lines]
 
-final_data = {"Название промпта": [], "Оценка": [], "Промпт": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+final_data = {"Название промпта": [], "Оценка": [], "Промпт": [],
               "Диалог с ботом": [], "Оценка LLM": []}
 samples_ids = []
 tokens = []
@@ -43,7 +43,7 @@ for sample_id in samples_ids:
 #         final_data["Диалог с ботом"].append(sample['input'])
 
 test_data_dict={}
-with open("test_data.jsonl", "r",
+with open("evals/registry/data/1test_dialog_bot/dialog.jsonl", "r",
           encoding="utf-8") as f:
     for line in f:
         item = json.loads(line)
@@ -53,6 +53,21 @@ with open("test_data.jsonl", "r",
             test_data_dict[name] = input_text
     for name in final_data["Название промпта"]:
         final_data['Диалог с ботом'].append(test_data_dict[name])
+
+
+test_data_dict.clear()
+
+with open("telegram/lead_gpt_prompts.jsonl", "r",
+          encoding="utf-8") as f:
+    for line in f:
+        item = json.loads(line)
+        name = item.get('name')
+        prompt_text = item.get('prompt')
+        if name and prompt_text:
+            test_data_dict[name] = prompt_text
+    for name in final_data["Название промпта"]:
+        final_data['Промпт'].append(test_data_dict[name])
+
 
 
 pprint.pprint(final_data)
